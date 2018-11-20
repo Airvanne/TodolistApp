@@ -1,33 +1,69 @@
 <h1 class="text-center mb-4">Welcome to my todolist app</h1>
 <%= render 'layouts/task_form'  %>
-<div class="container">
-  <ul>
-  <% @categories.each do  |category|%>
-  <li><%= category.title  %></li>
-  <div class="card">
-    <ul>
-      <% category.tasks.each do |task|  %>
-      <li>
-        <%= task.title  %>
-        <% unless task.deadline.nil? %>
-          , to read: <%= task.deadline.strftime('%D')  %>
-        <% end %>
+<div class="container borderless">
+  <ul class="list-group">
+    <% @categories.each do  |category|%>
+      <li class="list-group-item">
+        <button class="btn btn-info" id="id-btn-<%= category.title  %>"class="tablinks"> <%= category.title  %> </button>
       </li>
-      <% end %>
-    </ul>
-  </div>
-  <% end %>
+      <div id="id-content-<%= category.title  %>"class="card tabcontent">
+        <ul class="list-group">
+          <% category.tasks.each do |task|  %>
+            <li class="list-group-item">
+              <%= task.title  %>
+              <% unless task.deadline.nil? %>
+              , to read: <%= task.deadline.strftime('%D')  %>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
   </ul>
 </div>
 
-<div class="container">
-  <div class="row">
-    <% @tasks.each do |task|  %>
-      <div class="card col-3">
-        <% unless task.image.nil? %>
-          <%= image_tag task.image, class: "rounded-circle" %>
-        <% end %>
-      </div>
-    <% end %>
+<script type="text/javascript">
+  $(function() {
+    var container_base_id = 'id-content-';
+    var containers = $('[id*=' + container_base_id + ']');
+    var btn_base_id = 'id-btn-';
+    var btns = $('[id*=' + btn_base_id + ']');
+    containers.each(function() {
+      self = $(this);
+      self.toggle();
+    });
+
+    btns.each(function() {
+      $(this).on('click', function() {
+        container_id = '#' + container_base_id + $(this).attr('id').split('-')[2];
+        $(container_id).toggle();
+      });
+    });
+  });
+</script>
+
+<!-- Slideshow container -->
+<div class="slideshow-container">
+<!-- Full-width images with number and caption text -->
+  <% @tasks.each do |task|  %>
+  <div class="mySlides fade">
+    <div class="card col-12">
+      <% unless task.image.nil? %>
+        <%= image_tag task.image, class: "rounded-circle"%>
+      <% end %>
+    </div>
   </div>
+ <% end %>
+<!-- Next and previous buttons -->
+  <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+  <a class="next" onclick="plusSlides(1)">&#10095;</a>
+</div>
+
+<!-- The dots/circles -->
+<div style="text-align:center">
+  <% i = 1 %>
+  <% @tasks.each do %>
+    <span class="dot" onclick="currentSlide(i)"></span>
+    <% i += 1 %>
+  <% end %>
 </div>
