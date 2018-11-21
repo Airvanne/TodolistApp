@@ -1,0 +1,8 @@
+$(document).ready(function() {
+
+let new_task = $("<%= j (render 'layouts/tasks', tasks: @tasks) %>");
+// Je crée ma variable new_task. Le j signifie escape javascript et permet d'executer de l'erb.
+
+$('div#id-content-<%= @category.title.downcase.gsub(' ', '') %> ul').append(new_task);
+
+});
