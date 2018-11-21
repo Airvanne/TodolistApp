@@ -22,24 +22,34 @@
   </ul>
 </div>
 
+<!-- A PLACER AILLEURS ET A METTRE EN DROPDOWN -->
 <script type="text/javascript">
-  $(function() {
-    var container_base_id = 'id-content-';
-    var containers = $('[id*=' + container_base_id + ']');
-    var btn_base_id = 'id-btn-';
-    var btns = $('[id*=' + btn_base_id + ']');
-    containers.each(function() {
-      self = $(this);
-      self.toggle();
-    });
+$(document).ready(function() {$('ul > .card').hide();
+$('.container > ul > li').click(function(){
+     if( $(this).next().is(":hidden") ) {
+       $('ul > .card').hide(500);
+       $(this).next().show(500);
+      }
+      else
+      {
+       $(this).next().hide(500);
+      }
+   });
+$('.nav-item').hide();
+   $('.rounded-circle').click(function(){
+       $('.nav-item').toggle(500);
+      }
+   );
+   // $('.login').hide();
+   // $('.logina').click(function(){
+   //       $('.login').toggle(500);
+   // });
+   // $('.inscr').hide();
+   // $('.signup').click(function(){
+   //       $('.inscr').toggle(500);
+   // });
+});
 
-    btns.each(function() {
-      $(this).on('click', function() {
-        container_id = '#' + container_base_id + $(this).attr('id').split('-')[2];
-        $(container_id).toggle();
-      });
-    });
-  });
 </script>
 
 <!-- Slideshow container -->
