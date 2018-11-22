@@ -1,0 +1,30 @@
+<h1 class="text-center mb-4">Liste d'emails</h1>
+<div class="container borderless">
+  <ul class="list-group">
+    <% @email.each do |mail|%>
+      <div id='id-container-<% mail.id %>'>
+        <button class="btn btn-info" id="id-btn-<%= mail.objet %>"class="tablinks"> <%= mail.objet %> </button>
+        <div id="id-content-<%= mail.objet %>"class="card tabcontent">
+
+            <p>
+              <%= mail.body %>
+            </p>
+            <%= link_to 'Supprimer', mail, remote: true, method: :delete, data: { confirm: 'Êtes-vous sûr(e) ?' }%>
+
+        </div>
+      </div>
+    <% end %>
+  </ul>
+</div>
+
+def destroy
+  id = params.permit(:id)
+  @id_mail = id[:id]
+  @email = Email.find(@id_mail)
+  if @email.delete
+    respond_to do |format|
+      format.html { redirect_to emails_path }
+      format.js {@id_mail}
+    end
+  end
+end

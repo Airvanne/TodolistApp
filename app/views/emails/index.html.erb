@@ -1,16 +1,16 @@
 <h1 class="text-center mb-4">Liste d'emails</h1>
 <div class="container borderless">
-  <ul class="list-group">
-    <% @email.each do |mail|%>
-      <li class="list-group-item">
-        <button class="btn btn-info" id="id-btn-<%= mail.objet %>"class="tablinks"> <%= mail.objet %> </button>
-      </li>
-      <div id="id-content-<%= mail.objet %>"class="card tabcontent">
-        <ul class="list-group">
-          <%= mail.body %>
-          <%= link_to 'Supprimer', mail, method: :delete %>
-        </ul>
-      </div>
-    <% end %>
-  </ul>
+  <% @email.each do |mail|%>
+      <ul class="list-group" id="id-<%= mail.id %>">
+        <li class="list-group-item">
+          <button class="btn btn-info" id="id-btn-<%= mail.objet %>"class="tablinks"> <%= mail.objet %> </button>
+        </li>
+        <div id="id-content-<%= mail.objet %>"class="card tabcontent">
+          <ul class="list-group">
+            <%= mail.body %>
+            <%= link_to 'Supprimer', mail, remote: true, method: :delete, data: { confirm: 'Êtes-vous sûr(e) ?' }%>
+          </ul>
+        </div>
+      </ul>
+  <% end %>
 </div>

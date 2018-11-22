@@ -18,6 +18,6 @@ require 'faker'
   end
 end
 
-5.times do
+15.times do
   emails = Email.create(objet: Faker::Food.dish, body: Faker::Food.description)
 end
