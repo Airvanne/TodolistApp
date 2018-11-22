@@ -17,3 +17,7 @@ require 'faker'
     my_task.save
   end
 end
+
+5.times do
+  emails = Email.create(objet: Faker::Food.dish, body: Faker::Food.description)
+end
