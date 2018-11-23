@@ -134,3 +134,11 @@ $(document).on('turbolinks:load', function () {
   });
 
 });
+
+// FONCTION EMAIL LU/NON-LU
+$(document).ready(function(){
+   $("button").click(function(){
+       $(this).css("font-weight", "normal");
+       $(this).removeClass('unread').addClass('read');
+   });
+});

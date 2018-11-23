@@ -1,9 +1,9 @@
 <h1 class="text-center mb-4">Liste d'emails</h1>
 <div class="container borderless">
   <% @email.each do |mail|%>
-      <ul class="list-group" id="id-<%= mail.id %>">
+      <ul class="list-group email" id="id-<%= mail.id %>">
         <li class="list-group-item">
-          <button class="btn btn-info" id="id-btn-<%= mail.objet %>"class="tablinks"> <%= mail.objet %> </button>
+          <button class="btn btn-info unread" id="id-btn-<%= mail.objet %>"class="tablinks"> <%= mail.objet %> </button>
         </li>
         <div id="id-content-<%= mail.objet %>"class="card tabcontent">
           <ul class="list-group">
